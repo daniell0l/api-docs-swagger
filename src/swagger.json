@@ -76,13 +76,88 @@
         ],
         "responses": {
           "200": {
-            "description": "ok",
+          "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "arrey",
+                  "item": {
+                    "$ref": "#/components/schemas/Product"      
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "description": "Busca de um produto pelo id",
+        "summary": "Busca de um produto pelo id",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Nome do produto para pelo id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+          "description": "ok",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/Product"
-                }  
+                  "$ref": "#/components/schemas/Product"      
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Alterar o produto pelo id",
+        "summary": "Alterar um produto pelo id",
+        "tags": ["Products"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Nome do produto para pelo id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              },
+              "examples": {
+                "product": { 
+                  "value": {
+                    "name": "Mouse USB sem fio",
+                    "description": "Mouse USB RGB sem fio",
+                    "price": 129
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok",  
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Product"         
+                }
               }
             }
           }
